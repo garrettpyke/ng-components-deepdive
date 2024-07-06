@@ -1,9 +1,13 @@
+<!-- Dashes in class or style keys is not allowed. Wrap as string or use camelCase instead. -->
 <div
   [class]="{
     status: true,
     'status-online': currentStatus === 'online',
     'status-offline': currentStatus === 'offline',
     'status-unknown': currentStatus === 'unknown',
+  }"
+  [style]="{
+    fontSize: '55px',
   }"
 >
   @if (currentStatus === 'online') {
