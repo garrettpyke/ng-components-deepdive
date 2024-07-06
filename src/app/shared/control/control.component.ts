@@ -1,8 +1,10 @@
 import {
   Component,
-  HostBinding,
-  HostListener,
+  ElementRef,
+  // HostBinding,
+  // HostListener,
   ViewEncapsulation,
+  inject,
   input,
 } from "@angular/core";
 
@@ -25,8 +27,10 @@ export class ControlComponent {
   //   console.log('Clicked: ', this.label);
   // }
   label = input.required<string>();
+  private el = inject(ElementRef); // ElementRef can make page vulnerable to X Site Scripting attacks, but is available for programmatic access to host elements
 
   onClick() {
     console.log(`Clicked: ${this.label}`);
+    console.log(this.el);
   }
 }
