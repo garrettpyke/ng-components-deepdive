@@ -1,6 +1,7 @@
-<form>
+<form (ngSubmit)="onSubmit(titleInput)">
   <app-control label="Title">
-    <input name="title" id="title" />
+    <!-- Syntax below is alternative to 2-way binding called Template Values, which doesn't update with every keystroke. -->
+    <input name="title" id="title" #titleInput />
   </app-control>
   <app-control [label]="'Request'">
     <textarea name="request" id="request" rows="3"></textarea>
@@ -8,7 +9,6 @@
   <p>
     <button appButton>
       Submit
-      <!-- <span class="icon">☛</span> alternate method here -->
       <span ngProjectAs="icon">☛</span>
     </button>
   </p>
