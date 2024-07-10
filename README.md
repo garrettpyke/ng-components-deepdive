@@ -1,4 +1,8 @@
-# CmpDeepDive
+# Angular Components tutorial - deeper dive
+
+The incremental commits are meant to be instructional and serve as a reference.
+
+## CmpDeepDive
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.0-next.2.
 
