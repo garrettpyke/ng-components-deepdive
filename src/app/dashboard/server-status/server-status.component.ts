@@ -1,4 +1,11 @@
-import { Component, input, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  input,
+  OnInit,
+  OnDestroy,
+  inject,
+  DestroyRef,
+} from '@angular/core';
 
 @Component({
   selector: 'app-server-status',
@@ -10,6 +17,7 @@ import { Component, input, OnInit, OnDestroy } from '@angular/core';
 export class ServerStatusComponent implements OnInit, OnDestroy {
   currentStatus: 'online' | 'offline' | 'unknown' = 'offline';
   private interval?: ReturnType<typeof setInterval>; // synax means that the type is whatever is returned by setInterval
+  private destroyRef = inject(DestroyRef); //* see comment in ngOnInit()
 
   constructor() {}
 
@@ -27,6 +35,13 @@ export class ServerStatusComponent implements OnInit, OnDestroy {
         this.currentStatus = 'unknown';
       }
     }, 5000);
+
+    //* The following injectable destroyRef is available as of ng v16+. Whatever function is defined can be used in multiple places/hooks
+    //* ...and more than once, unlike ngOnDestroy
+    this.destroyRef.onDestroy(() => {
+      console.log('Destroying ServerStatusComponent');
+      clearInterval(this.interval);
+    });
   }
 
   // Remove timer from memory when component is terminated (avoid a memory leak)
